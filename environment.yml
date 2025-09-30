@@ -1,0 +1,22 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - run: pip install -r requirements.txt || true
+      - run: |
+          test -f data/processed/timeseries/1295_LG_past_layout1_body.csv || exit 0
+          mkdir -p results/segments
+          python scripts/detect_holds.py \
+            --in data/processed/timeseries/1295_LG_past_layout1_body.csv \
+            --out results/segments/1295_LG_segments.csv \
+            --fs 30 --thresh 0.01 --min-dur 0.2 --merge-gap 0.1 --min-ipi 0.1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: segments
+          path: results/segments/**
+          if-no-files-found: ignore
