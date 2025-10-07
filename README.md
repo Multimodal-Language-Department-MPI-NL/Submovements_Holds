@@ -1,25 +1,91 @@
 # Submovements and Holds
 
-Detection of holds and submovements from Mediapipe time series.
+Detect holds and submovements from MediaPipe keypoint time series and summarize gesture pauses.
 
-## Inputs
-`data/processed/timeseries/*.csv` with axis-suffixed columns like `WRIST_x, WRIST_y, WRIST_z`.  
-Optional time column in seconds. If missing, set `--fs`.
+## 🔬 Research Context
 
-## Environment
+This module quantifies temporal structure in gestures by counting submovements and identifying holds (low-velocity pauses), enabling complexity and fluency analyses.
+
+## 🎯 What This Project Does
+
+1. **Load keypoints**: Read body landmark time series
+2. **Convert to OpenPose-like format**: Map selected MediaPipe landmarks to expected keys
+3. **Detect submovements**: Peak picking on smoothed hand velocity traces
+4. **Detect holds**: Identify low-velocity clusters and compute durations
+5. **Batch processing**: Optionally compute measures across multiple files
+
+## 📊 Analysis Process
+
+1. **Begin with Cleaned Data**: Use processed time series with `time` and landmark coordinates
+2. **Convert Coordinates**: Build OpenPose-like columns (e.g., `L_Hand`, `R_Hand`, `Neck`, `MidHip`)
+3. **Tune Parameters**: Interactively set `height`, `prominence`, `distance` for peak detection
+4. **Compute Metrics**: Submovement counts; number of holds, total/average hold duration
+5. **Export**: Save per-file summaries to CSV
+
+## 🔧 Methods
+
+- **Velocity estimation**: Frame-to-frame displacement × FPS
+- **Smoothing**: Savitzky–Golay on velocity before peak picking
+- **Peak detection**: `scipy.signal.find_peaks` with `height`, `prominence`, `distance`
+- **Hold detection**: Velocity thresholding and clustering into contiguous segments
+
+## 📁 Project Structure
+
+```
+Submovements_Holds/
+├── README.md
+├── environment.yml
+├── notebooks/
+│   └── 01-gesture_hold_time_pauses.ipynb
+├── data/
+│   └── processed/
+│       └── timeseries/                 # Input CSVs
+├── results/
+│   ├── segments/                       # Output event segments (optional)
+│   └── figures/
+│       └── diagram.png
+└── scripts/
+    └── detect_holds.py                 # (If used)
+```
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+```bash
 conda env create -f environment.yml
 conda activate submovements
+```
 
-## CLI
-# run hold detection and submovement peak picking on a file
-python scripts/detect_holds.py \
-  --in data/processed/timeseries/1295_LG_past_layout1_body.csv \
-  --out results/segments/1295_LG_segments.csv \
-  --fs 30 --thresh 0.01 --min-dur 0.2 --merge-gap 0.1 --min-ipi 0.1
+### Run the Interactive Notebook
 
-## Notebook
+```bash
 jupyter lab
-# open notebooks/01-gesture_hold_time_pauses.ipynb
+# Open notebooks/01-gesture_hold_time_pauses.ipynb
+```
 
-## Outputs
-`results/segments/*.csv` with rows for `hold` and `submovement` events.
+### Basic Usage
+
+1. Load a time series CSV from `data/processed/timeseries/`
+2. Adjust peak-detection sliders (height, prominence, distance)
+3. Compute submovements and holds; inspect plots and video frame alignment
+4. Save summaries to `results/segments/` if needed
+
+## 📈 Data Format
+
+### Input
+- **CSV files**: Landmark coordinates per frame; include `time` if available
+
+### Output
+- **CSV summaries**: Per-file metrics (e.g., `num_holds`, `avg_hold_duration`)
+- **Interactive figures**: Peak locations, hold intervals overlaid on velocity
+
+## 🔗 Related Projects
+
+- `../Smoothing/`
+- `../Normalization/`
+- `../Speed_Acceleration_Jerk/`
+
+## 📖 References
+
+- `scipy.signal.find_peaks` documentation
