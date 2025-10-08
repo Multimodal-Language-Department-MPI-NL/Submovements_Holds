@@ -64,12 +64,6 @@ jupyter lab
 # Open notebooks/01-gesture_hold_time_pauses.ipynb
 ```
 
-### Basic Usage
-
-1. Load a time series CSV from `data/processed/timeseries/`
-2. Adjust peak-detection sliders (height, prominence, distance)
-3. Compute submovements and holds; inspect plots and video frame alignment
-4. Save summaries to `results/segments/` if needed
 
 ## 📈 Data Format
 
@@ -88,4 +82,5 @@ jupyter lab
 
 ## 📖 References
 
+- **Attribution**: Envision Box Module
 - `scipy.signal.find_peaks` documentation
