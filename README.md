@@ -1,5 +1,7 @@
 # Submovements and Holds
 
+> Attribution: Envision Box: [Module](https://www.envisionbox.org/embedded_Analysis_kinematic_features_module.html)
+
 Detect holds and submovements from MediaPipe keypoint time series and summarize gesture pauses.
 
 ## 🔬 Research Context
