@@ -1,6 +1,6 @@
 # Submovements and Holds
 
-> Attribution: Envision Box: [Module](https://www.envisionbox.org/embedded_Analysis_kinematic_features_module.html)
+> Attribution: Use the script prepared for the focus group session. Attribute to this Envision Box module: [Module](https://www.envisionbox.org/embedded_MergingMultimodal_inPython.html)
 
 Detect holds and submovements from MediaPipe keypoint time series and summarize gesture pauses.
 
@@ -16,7 +16,7 @@ This module quantifies temporal structure in gestures by counting submovements a
 4. **Detect holds**: Identify low-velocity clusters and compute durations
 5. **Batch processing**: Optionally compute measures across multiple files
 
-## 📊 Analysis Process
+## 📊 Smoothing Process
 
 1. **Begin with Cleaned Data**: Use processed time series with `time` and landmark coordinates
 2. **Convert Coordinates**: Build OpenPose-like columns (e.g., `L_Hand`, `R_Hand`, `Neck`, `MidHip`)
@@ -24,7 +24,7 @@ This module quantifies temporal structure in gestures by counting submovements a
 4. **Compute Metrics**: Submovement counts; number of holds, total/average hold duration
 5. **Export**: Save per-file summaries to CSV
 
-## 🔧 Methods
+## 🔧 Smoothing Techniques
 
 - **Velocity estimation**: Frame-to-frame displacement × FPS
 - **Smoothing**: Savitzky–Golay on velocity before peak picking
@@ -78,9 +78,9 @@ jupyter lab
 
 ## 🔗 Related Projects
 
-- `../Smoothing/`
-- `../Normalization/`
-- `../Speed_Acceleration_Jerk/`
+- `https://github.com/Multimodal-Language-Department-MPI-NL/Smoothing`
+- `https://github.com/Multimodal-Language-Department-MPI-NL/Normalization`
+- `https://github.com/Multimodal-Language-Department-MPI-NL/Speed_Acceleration_Jerk`
 
 ## 📖 References
 
