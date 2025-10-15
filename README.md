@@ -6,7 +6,7 @@ Detect holds and submovements from MediaPipe keypoint time series and summarize 
 
 ## 🔬 Research Context
 
-This module quantifies temporal structure in gestures by counting submovements and identifying holds (low-velocity pauses), enabling complexity and fluency analyses.
+This module shows how to calculate the number of submovements of a movement signal based on peak speed and detect movement holds (i.e., pauses) below a certain speed threshold. These measures relate to how complex and/or segmented a movement signal is.
 
 ## 🎯 What This Project Does
 
