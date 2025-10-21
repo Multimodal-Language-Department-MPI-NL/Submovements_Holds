@@ -1,6 +1,16 @@
 # Submovements and Holds
 
-> Attribution: Use the script prepared for the focus group session. Attribute to this Envision Box module: [Module](https://www.envisionbox.org/embedded_MergingMultimodal_inPython.html)
+## Attribution
+
+The custom functions for detecting gesture submovements and holds are sourced from the following EnvisionBox module: **Kinematic Feature Extraction for Motion Tracking Analysis**.
+
+If you found this code helpful for your research, please cite the original source code material from the EnvisionBox website:
+
+**Trujillo, J.P. & Pouw, W.T.J.L. (2021-11-18).** *Kinematic Feature Extraction for Motion Tracking Analysis.* Retrieved from: https://github.com/WimPouw/EnvisionBootcamp2021/tree/main/Python/Analysis_kinematic_features
+
+**Trujillo, J.P., Vaitonyte, J., Simanova, I. et al. (2019).** Toward the markerless and automatic analysis of kinematic features: A toolkit for gesture and movement research. *Behavior Research Methods*, 51, 769–777. https://doi.org/10.3758/s13428-018-1086-8
+
+---
 
 Detect holds and submovements from MediaPipe keypoint time series and summarize gesture pauses.
 
